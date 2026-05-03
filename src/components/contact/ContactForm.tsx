@@ -1,28 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { HiArrowRight } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiArrowRight, HiSparkles } from "react-icons/hi";
 import { FaShieldAlt } from "react-icons/fa";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 const PRODUCT_OPTIONS = [
-  "Fresh Ginger",
-  "Turmeric",
-  "Dry Ginger",
-  "Black Cardamom",
-  "Dry King Chilli",
-  "Assam Gold Green Tea",
-  "Assam Gold Elachi Tea",
-  "Assam Gold Masala Tea",
-  "Assam Gold Garden Fresh Tea",
-  "Multiple Products",
+  "Fresh Ginger", "Turmeric", "Dry Ginger", "Black Cardamom",
+  "Dry King Chilli", "Assam Gold Green Tea", "Assam Gold Elachi Tea",
+  "Assam Gold Masala Tea", "Assam Gold Garden Fresh Tea", "Multiple Products",
 ];
 
-const inputClass =
-  "w-full border border-[#E8D9C8] rounded-xl px-5 py-4 text-[#1A1A1A] font-sans text-base focus:outline-none focus:border-[#D94F0A] focus:ring-2 focus:ring-[#D94F0A]/20 transition-all bg-[#FDF8F2] placeholder:text-[#7A7A7A]";
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="text-xs font-black uppercase tracking-[0.14em]" style={{ color: "rgba(26,26,26,0.5)" }}>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
 
-const labelClass = "block text-sm font-sans font-semibold text-[#4A4A4A] mb-2";
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "#FDFAF7",
+  border: "1px solid #EDE5DA",
+  borderRadius: "16px",
+  padding: "16px 20px",
+  fontSize: "15px",
+  color: "#1A1A1A",
+  outline: "none",
+  transition: "all 0.3s ease",
+  fontFamily: "inherit",
+  boxShadow: "inset 0 2px 4px rgba(0,0,0,0.02)",
+};
+
+const focusHandlers = {
+  onFocus: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.target.style.borderColor = "#D94F0A";
+    e.target.style.boxShadow = "0 0 0 3px rgba(217,79,10,0.1)";
+  },
+  onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.target.style.borderColor = "#EDE5DA";
+    e.target.style.boxShadow = "none";
+  },
+};
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -32,114 +56,108 @@ export default function ContactForm() {
     setSubmitted(true);
   };
 
-  if (submitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="bg-white rounded-xl shadow-2xl p-10 text-center"
-      >
-        <div className="w-20 h-20 bg-[#2D6A2D]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-          <BsCheckCircleFill size={36} className="text-[#2D6A2D]" />
-        </div>
-        <h3 className="font-display text-3xl font-bold text-[#1A1A1A] mb-3">Enquiry Sent!</h3>
-        <p className="text-[#7A7A7A] font-sans text-base leading-relaxed">
-          We&apos;ve received your enquiry and will get back to you within 24 hours.
-        </p>
-      </motion.div>
-    );
-  }
-
   return (
-    <motion.form
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6 }}
-      onSubmit={handleSubmit}
-      className="bg-white rounded-xl shadow-2xl p-8 sm:p-10 space-y-6"
-    >
-      <div>
-        <h3 className="font-display text-3xl font-bold text-[#1A1A1A] mb-1">Send Us an Enquiry</h3>
-        <p className="text-[#7A7A7A] font-sans text-sm">We&apos;ll get back within 24 hours</p>
-      </div>
+    <AnimatePresence mode="wait">
+      {submitted ? (
+        <motion.div key="success"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white rounded-[2rem] p-10 text-center flex flex-col items-center justify-center min-h-[500px]"
+          style={{ border: "1px solid #F0E8DF", boxShadow: "0 12px 60px rgba(0,0,0,0.08)" }}>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 220 }}
+            className="w-24 h-24 rounded-full flex items-center justify-center mb-8"
+            style={{ background: "rgba(45,106,45,0.08)" }}>
+            <BsCheckCircleFill size={44} style={{ color: "#2D6A2D" }} />
+          </motion.div>
+          <h3 className="font-black text-[#1A1A1A] text-3xl mb-3">Enquiry Received!</h3>
+          <p className="text-base leading-relaxed max-w-xs text-[#7A7A7A]">
+            Thank you for reaching out. Our wholesale team will contact you within 24 hours.
+          </p>
+        </motion.div>
+      ) : (
+        <motion.form key="form"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          onSubmit={handleSubmit}
+          className="bg-white rounded-[2rem] p-8 sm:p-12 space-y-8"
+          style={{ border: "1px solid #F0E8DF", boxShadow: "0 15px 70px rgba(0,0,0,0.06)" }}>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label className={labelClass}>Full Name *</label>
-          <input
-            type="text"
-            required
-            placeholder="Your full name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>Business Name *</label>
-          <input
-            type="text"
-            required
-            placeholder="Your business name"
-            className={inputClass}
-          />
-        </div>
-      </div>
+          {/* header */}
+          <div className="pb-4 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <span className="flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em]"
+                style={{ background: "rgba(217,79,10,0.08)", border: "1px solid rgba(217,79,10,0.15)", color: "#D94F0A" }}>
+                <HiSparkles size={12} />
+                Direct Inquiry
+              </span>
+            </div>
+            <h3 className="font-black text-[#1A1A1A] text-2xl sm:text-4xl mb-2 tracking-tight">Send Us an Enquiry</h3>
+            <p className="text-base text-[#7A7A7A]">We respond to all wholesale queries promptly.</p>
+          </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label className={labelClass}>Phone Number *</label>
-          <input
-            type="tel"
-            required
-            placeholder="+91 XXXXX XXXXX"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label className={labelClass}>City / State *</label>
-          <input
-            type="text"
-            required
-            placeholder="Your city, state"
-            className={inputClass}
-          />
-        </div>
-      </div>
+          <div className="space-y-6">
+            {/* row 1 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Field label="Full Name *">
+                <input type="text" required placeholder="John Doe" style={inputStyle} {...focusHandlers} />
+              </Field>
+              <Field label="Business Name *">
+                <input type="text" required placeholder="Company Pvt Ltd" style={inputStyle} {...focusHandlers} />
+              </Field>
+            </div>
 
-      <div>
-        <label className={labelClass}>Product Interest</label>
-        <select className={inputClass}>
-          <option value="">Select a product...</option>
-          {PRODUCT_OPTIONS.map((p) => (
-            <option key={p} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
-      </div>
+            {/* row 2 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Field label="Phone Number *">
+                <input type="tel" required placeholder="+91 XXXXX XXXXX" style={inputStyle} {...focusHandlers} />
+              </Field>
+              <Field label="City / State *">
+                <input type="text" required placeholder="Guwahati, Assam" style={inputStyle} {...focusHandlers} />
+              </Field>
+            </div>
 
-      <div>
-        <label className={labelClass}>Message</label>
-        <textarea
-          rows={5}
-          placeholder="Tell us about your requirements, quantity needed, delivery location, etc."
-          className={`${inputClass} resize-none`}
-        />
-      </div>
+            {/* product select */}
+            <Field label="Product Interest">
+              <select style={inputStyle} {...focusHandlers}>
+                <option value="">Select a category...</option>
+                {PRODUCT_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </Field>
 
-      <motion.button
-        type="submit"
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
-        className="w-full flex items-center justify-center gap-2 bg-[#D94F0A] hover:bg-[#B03A06] text-white font-sans font-semibold text-base tracking-wide uppercase px-6 py-5 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-[#D94F0A]/30"
-      >
-        Send Enquiry
-        <HiArrowRight size={18} />
-      </motion.button>
+            {/* message */}
+            <Field label="Message">
+              <textarea rows={4} placeholder="Briefly describe your requirements..."
+                style={{ ...inputStyle, resize: "none" }}
+                {...focusHandlers} />
+            </Field>
+          </div>
 
-      <p className="text-center text-[#7A7A7A] text-sm font-sans flex items-center justify-center gap-2">
-        <FaShieldAlt size={13} className="text-[#2D6A2D]" />
-        Your details are safe with us
-      </p>
-    </motion.form>
+          {/* submit */}
+          <div className="pt-2">
+            <motion.button type="submit" whileHover={{ scale: 1.01, y: -2 }} whileTap={{ scale: 0.98 }}
+              className="relative w-full flex items-center justify-center gap-3 font-black text-sm tracking-[0.15em] uppercase py-5 rounded-2xl overflow-hidden shadow-2xl shadow-[rgba(217,79,10,0.4)]"
+              style={{ color: "#fff" }}>
+              <span className="absolute inset-0"
+                style={{ background: "linear-gradient(135deg, #D94F0A, #FF7A2F 60%, #FFBA45)" }} />
+              <span className="relative z-10 flex items-center gap-2">
+                <HiSparkles size={16} />
+                Submit Enquiry
+                <HiArrowRight size={16} />
+              </span>
+            </motion.button>
+
+            <p className="mt-6 text-center text-[10px] font-bold uppercase tracking-[0.1em] flex items-center justify-center gap-2"
+              style={{ color: "rgba(26,26,26,0.3)" }}>
+              <FaShieldAlt size={12} className="text-[#2D6A2D] opacity-60" />
+              End-to-End Encrypted & Secure
+            </p>
+          </div>
+        </motion.form>
+      )}
+    </AnimatePresence>
   );
 }

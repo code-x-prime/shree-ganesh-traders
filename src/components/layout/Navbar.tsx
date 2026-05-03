@@ -6,7 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { NAV_LINKS, } from "@/lib/data/constants";
+import { HiSparkles } from "react-icons/hi";
+import { NAV_LINKS } from "@/lib/data/constants";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,8 +15,8 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -23,101 +24,197 @@ export default function Navbar() {
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-white/95 backdrop-blur-md shadow-md border-b border-[#E8D9C8]"
-        : "bg-white border-b border-[#E8D9C8]"
-        }`}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 right-0 z-50"
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Sree Ganesh Traders logo"
-            width={80}
-            height={80}
-            className="object-contain"
-            priority
-          />
+      {/* ── NAV SHELL ── */}
+      <div
+        className="transition-all duration-300"
+        style={{
+          background: scrolled
+            ? "rgba(253,248,242,0.92)"
+            : "rgba(253,248,242,1)",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
+          borderBottom: "1px solid rgba(217,79,10,0.12)",
+          boxShadow: scrolled ? "0 4px 32px rgba(0,0,0,0.07)" : "none",
+        }}
+      >
+        <nav className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-16 h-20 flex items-center justify-between">
 
-        </Link>
-
-        <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => {
-            const isActive =
-              pathname === link.href ||
-              (link.href !== "/" && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative font-sans font-medium text-base transition-colors duration-200 group ${isActive ? "text-[#D94F0A]" : "text-[#4A4A4A] hover:text-[#D94F0A]"
-                  }`}
-              >
-                {link.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-[#D94F0A] transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                />
-              </Link>
-            );
-          })}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden md:inline-flex bg-[#D94F0A] hover:bg-[#B03A06] text-white font-sans font-semibold text-sm tracking-wider uppercase px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-[#D94F0A]/30"
-          >
-            GET A QUOTE
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-2 shrink-0 group">
+            <div className="relative">
+              <Image
+                src="/logo.png"
+                alt="Sree Ganesh Traders logo"
+                width={72}
+                height={72}
+                className="object-contain transition-transform duration-300 group-hover:scale-105"
+                priority
+              />
+            </div>
           </Link>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-[#FFF7EE] transition-colors"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? (
-              <X size={24} className="text-[#1A1A1A]" />
-            ) : (
-              <Menu size={24} className="text-[#1A1A1A]" />
-            )}
-          </button>
-        </div>
-      </nav>
 
+          {/* DESKTOP NAV LINKS */}
+          <div className="hidden md:flex items-center gap-7">
+            {NAV_LINKS.map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative group py-1"
+                >
+                  <span
+                    className="font-bold text-sm uppercase tracking-[0.1em] transition-colors duration-200"
+                    style={{ color: isActive ? "#D94F0A" : "#4A4A4A" }}
+                  >
+                    {link.label}
+                  </span>
+                  {/* underline */}
+                  <span
+                    className="absolute -bottom-0.5 left-0 h-0.5 rounded-full transition-all duration-300"
+                    style={{
+                      width: isActive ? "100%" : "0%",
+                      background: "linear-gradient(to right, #D94F0A, #FFBA45)",
+                    }}
+                  />
+                  {/* hover underline */}
+                  {!isActive && (
+                    <span
+                      className="absolute -bottom-0.5 left-0 h-0.5 rounded-full w-0 group-hover:w-full transition-all duration-300"
+                      style={{ background: "linear-gradient(to right, #D94F0A, #FFBA45)" }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* CTA + HAMBURGER */}
+          <div className="flex items-center gap-3">
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="hidden md:block"
+            >
+              <Link
+                href="/contact"
+                className="group relative inline-flex items-center gap-2 font-bold text-xs tracking-[0.14em] uppercase px-6 py-3 rounded-2xl overflow-hidden"
+                style={{ color: "#fff" }}
+              >
+                <span
+                  className="absolute inset-0 transition-opacity duration-300"
+                  style={{
+                    background: "linear-gradient(135deg, #D94F0A, #FF7A2F 60%, #FFBA45)",
+                    boxShadow: "0 4px 20px rgba(217,79,10,0.4)",
+                  }}
+                />
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <HiSparkles size={13} />
+                  Get a Quote
+                </span>
+              </Link>
+            </motion.div>
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 rounded-xl transition-colors duration-200"
+              style={{ background: menuOpen ? "rgba(217,79,10,0.08)" : "transparent" }}
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {menuOpen ? (
+                  <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X size={22} style={{ color: "#D94F0A" }} />
+                  </motion.div>
+                ) : (
+                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu size={22} style={{ color: "#1A1A1A" }} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {/* ── MOBILE MENU ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-white border-t border-[#E8D9C8] overflow-hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden overflow-hidden"
+            style={{
+              background: "rgba(253,248,242,0.97)",
+              backdropFilter: "blur(20px)",
+              borderBottom: "1px solid rgba(217,79,10,0.12)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.08)",
+            }}
           >
-            <div className="px-4 py-5 flex flex-col gap-1">
-              {NAV_LINKS.map((link) => {
+            <div className="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1">
+              {NAV_LINKS.map((link, i) => {
                 const isActive = pathname === link.href;
                 return (
-                  <Link
+                  <motion.div
                     key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`font-sans font-medium text-base py-3 px-3 rounded-lg border-b border-[#E8D9C8]/50 ${isActive
-                      ? "text-[#D94F0A] bg-[#D94F0A]/5"
-                      : "text-[#4A4A4A] hover:text-[#D94F0A] hover:bg-[#FDF8F2]"
-                      }`}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
                   >
-                    {link.label}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-3 py-3 px-4 rounded-xl font-bold text-sm uppercase tracking-[0.1em] transition-all duration-200"
+                      style={{
+                        color: isActive ? "#D94F0A" : "#4A4A4A",
+                        background: isActive ? "rgba(217,79,10,0.07)" : "transparent",
+                      }}
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{
+                          background: isActive
+                            ? "linear-gradient(135deg, #D94F0A, #FFBA45)"
+                            : "rgba(74,74,74,0.2)",
+                        }}
+                      />
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 );
               })}
-              <Link
-                href="/contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-3 bg-[#D94F0A] text-white font-sans font-semibold text-sm tracking-wider uppercase px-5 py-4 rounded-xl text-center"
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: NAV_LINKS.length * 0.05 + 0.05 }}
+                className="mt-3"
               >
-                GET A QUOTE
-              </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="relative flex items-center justify-center gap-2 w-full font-bold text-xs tracking-[0.14em] uppercase px-6 py-4 rounded-2xl overflow-hidden"
+                  style={{ color: "#fff" }}
+                >
+                  <span
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(135deg, #D94F0A, #FF7A2F 60%, #FFBA45)",
+                      boxShadow: "0 4px 20px rgba(217,79,10,0.4)",
+                    }}
+                  />
+                  <span className="relative z-10 flex items-center gap-2">
+                    <HiSparkles size={13} />
+                    Get a Quote
+                  </span>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
