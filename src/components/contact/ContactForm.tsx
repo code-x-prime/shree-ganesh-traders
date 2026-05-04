@@ -50,10 +50,43 @@ const focusHandlers = {
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    businessName: "",
+    email: "",
+    phone: "",
+    location: "",
+    product: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Failed to send message. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -103,26 +136,31 @@ export default function ContactForm() {
             {/* row 1 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Field label="Full Name *">
-                <input type="text" required placeholder="John Doe" style={inputStyle} {...focusHandlers} />
+                <input type="text" name="name" required placeholder="John Doe" style={inputStyle} {...focusHandlers} value={formData.name} onChange={handleChange} />
               </Field>
               <Field label="Business Name *">
-                <input type="text" required placeholder="Company Pvt Ltd" style={inputStyle} {...focusHandlers} />
+                <input type="text" name="businessName" required placeholder="Company Pvt Ltd" style={inputStyle} {...focusHandlers} value={formData.businessName} onChange={handleChange} />
               </Field>
             </div>
 
-            {/* row 2 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Field label="Phone Number *">
-                <input type="tel" required placeholder="+91 XXXXX XXXXX" style={inputStyle} {...focusHandlers} />
+              <Field label="Email Address *">
+                <input type="email" name="email" required placeholder="john@example.com" style={inputStyle} {...focusHandlers} value={formData.email} onChange={handleChange} />
               </Field>
+              <Field label="Phone Number *">
+                <input type="tel" name="phone" required placeholder="+91 XXXXX XXXXX" style={inputStyle} {...focusHandlers} value={formData.phone} onChange={handleChange} />
+              </Field>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
               <Field label="City / State *">
-                <input type="text" required placeholder="Guwahati, Assam" style={inputStyle} {...focusHandlers} />
+                <input type="text" name="location" required placeholder="Guwahati, Assam" style={inputStyle} {...focusHandlers} value={formData.location} onChange={handleChange} />
               </Field>
             </div>
 
             {/* product select */}
             <Field label="Product Interest">
-              <select style={inputStyle} {...focusHandlers}>
+              <select name="product" style={inputStyle} {...focusHandlers} value={formData.product} onChange={handleChange}>
                 <option value="">Select a category...</option>
                 {PRODUCT_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
               </select>
@@ -130,23 +168,29 @@ export default function ContactForm() {
 
             {/* message */}
             <Field label="Message">
-              <textarea rows={4} placeholder="Briefly describe your requirements..."
+              <textarea name="message" rows={4} placeholder="Briefly describe your requirements..."
                 style={{ ...inputStyle, resize: "none" }}
-                {...focusHandlers} />
+                {...focusHandlers} value={formData.message} onChange={handleChange} />
             </Field>
           </div>
 
           {/* submit */}
           <div className="pt-2">
-            <motion.button type="submit" whileHover={{ scale: 1.01, y: -2 }} whileTap={{ scale: 0.98 }}
-              className="relative w-full flex items-center justify-center gap-3 font-black text-sm tracking-[0.15em] uppercase py-5 rounded-2xl overflow-hidden shadow-2xl shadow-[rgba(217,79,10,0.4)]"
+            <motion.button type="submit" disabled={loading} whileHover={{ scale: 1.01, y: -2 }} whileTap={{ scale: 0.98 }}
+              className="relative w-full flex items-center justify-center gap-3 font-black text-sm tracking-[0.15em] uppercase py-5 rounded-2xl overflow-hidden shadow-2xl shadow-[rgba(217,79,10,0.4)] disabled:opacity-70 disabled:cursor-not-allowed"
               style={{ color: "#fff" }}>
               <span className="absolute inset-0"
                 style={{ background: "linear-gradient(135deg, #D94F0A, #FF7A2F 60%, #FFBA45)" }} />
               <span className="relative z-10 flex items-center gap-2">
-                <HiSparkles size={16} />
-                Submit Enquiry
-                <HiArrowRight size={16} />
+                {loading ? (
+                  <span className="animate-pulse">Sending...</span>
+                ) : (
+                  <>
+                    <HiSparkles size={16} />
+                    Submit Enquiry
+                    <HiArrowRight size={16} />
+                  </>
+                )}
               </span>
             </motion.button>
 

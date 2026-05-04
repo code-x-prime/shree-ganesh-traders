@@ -59,5 +59,5 @@ export const MILESTONES = [
   { year: "2021", title: "Pan India Delivery", description: "Launched nationwide delivery network for B2B partners." },
   { year: "2022", title: "Tea Distribution", description: "Became official distribution partner for Assam CTC Premium Tea." },
   { year: "2023", title: "500+ Business Partners", description: "Crossed the milestone of 500 satisfied B2B customers." },
-  { year: "2024", title: "North East Expansion", description: "Extended sourcing network across all 7 North East states." },
+  { year: "2026", title: "North East Expansion", description: "Extended sourcing network across all 7 North East states." },
 ];
