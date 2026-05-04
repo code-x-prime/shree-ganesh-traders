@@ -8,12 +8,21 @@ export const metadata: Metadata = {
   title: "Sree Ganesh Traders — Premium Spices & Tea from North East India",
   description:
     "Sree Ganesh Traders is a premium B2B distributor of natural spices and Assam CTC Tea from North East India. Pan India delivery available. 100% natural, chemical free.",
-  keywords: "spices, turmeric, ginger, assam tea, north east india, wholesale spices, B2B, guwahati",
+  metadataBase: new URL("https://sreeganeshtraders.com"),
+  keywords: "spices, turmeric, ginger, assam tea, north east india, wholesale spices, B2B, guwahati, assam ctc tea",
   openGraph: {
     title: "Sree Ganesh Traders — Pure Roots. Natural Goodness.",
     description: "Premium quality spices & tea from North East India. Direct farm sourcing. Pan India delivery.",
     type: "website",
     locale: "en_IN",
+    url: "https://sreeganeshtraders.com",
+    siteName: "Sree Ganesh Traders",
+  },
+  verification: {
+    google: "lxV_lPqh4tH1q8pNKOt_Zdl_0k1T01TFABeSbDE18-Q",
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 
