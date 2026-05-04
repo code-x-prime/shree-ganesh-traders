@@ -102,7 +102,7 @@ export default function TeaSection() {
                     backgroundClip: "text",
                   }}
                 >
-                  Gold
+                  CTC
                 </span>
               </h2>
               <h2
@@ -124,7 +124,7 @@ export default function TeaSection() {
               className="text-base sm:text-lg leading-relaxed mb-10"
               style={{ color: "rgba(255,255,255,0.45)" }}
             >
-              We proudly distribute Assam Gold — 4 exquisite flavours with 1 gold standard.
+              We proudly distribute Assam CTC — 4 exquisite flavours with 1 gold standard.
               Available in 250g and 1kg packs.
             </motion.p>
 
@@ -199,7 +199,7 @@ export default function TeaSection() {
           >
             <Image
               src="/assam-gold.jpg"
-              alt="Assam Gold Premium Tea"
+              alt="Assam CTC Premium Tea"
               fill
               className="object-cover"
               unoptimized
@@ -231,7 +231,7 @@ export default function TeaSection() {
                   backgroundClip: "text",
                 }}
               >
-                Assam Gold
+                Assam CTC
               </p>
               <p className="text-sm font-semibold text-white/70">4 Exquisite Flavours · 1 Gold Standard</p>
               <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>
@@ -250,7 +250,7 @@ export default function TeaSection() {
               }}
             >
               <AiFillStar size={20} className="text-[#0D1A0D] mb-0.5" />
-              <span className="text-[9px] font-black text-[#0D1A0D] uppercase tracking-wide leading-none">Gold</span>
+              <span className="text-[9px] font-black text-[#0D1A0D] uppercase tracking-wide leading-none">CTC</span>
             </motion.div>
           </motion.div>
         </div>

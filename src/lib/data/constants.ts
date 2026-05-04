@@ -7,11 +7,11 @@ export const COMPANY = {
   location: "Guwahati, Assam, North East India",
   phone: "6003312525",
   facebook: "Sree Ganesh Traders",
-  facebookUrl: "https://www.facebook.com/SreeGaneshTraders",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61588989635922",
   instagram: "@sreeganeshtraders",
-  instagramUrl: "https://www.instagram.com/sreeganeshtraders",
+  instagramUrl: "https://www.instagram.com/sreeganeshtraders/",
   whatsapp: "916003312525",
-  address: "Guwahati, Assam, North East India",
+  address: "Guwahati, Assam - 781028, North East India",
 };
 
 export const NAV_LINKS: NavLink[] = [
@@ -23,7 +23,7 @@ export const NAV_LINKS: NavLink[] = [
 
 export const CONTACT_INFO: ContactInfo = {
   phone: "6003312525",
-  address: "Guwahati, Assam, North East India",
+  address: "Guwahati, Assam - 781028, North East India",
   facebook: "Sree Ganesh Traders",
   instagram: "@sreeganeshtraders",
   whatsapp: "916003312525",
@@ -57,7 +57,7 @@ export const MILESTONES = [
   { year: "2019", title: "Company Founded", description: "Sree Ganesh Traders established in Guwahati, Assam." },
   { year: "2020", title: "Expanded Product Range", description: "Added premium turmeric and cardamom to our product lineup." },
   { year: "2021", title: "Pan India Delivery", description: "Launched nationwide delivery network for B2B partners." },
-  { year: "2022", title: "Tea Distribution", description: "Became official distribution partner for Assam Gold Premium Tea." },
+  { year: "2022", title: "Tea Distribution", description: "Became official distribution partner for Assam CTC Premium Tea." },
   { year: "2023", title: "500+ Business Partners", description: "Crossed the milestone of 500 satisfied B2B customers." },
   { year: "2024", title: "North East Expansion", description: "Extended sourcing network across all 7 North East states." },
 ];

@@ -112,7 +112,7 @@ export default function ContactContent() {
               style={{ border: 0, display: "block", filter: "grayscale(0.2) contrast(1.1)" }}
               allowFullScreen loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Sree Ganesh Traders location - Guwahati, Assam"
+              title="Sree Ganesh Traders location - Guwahati, Assam 781028"
             />
 
             {/* Overlay Gradient */}
@@ -121,7 +121,7 @@ export default function ContactContent() {
             {/* Directions Floating Button */}
             <div className="absolute bottom-8 right-8">
               <motion.a
-                href="https://maps.google.com/?q=Guwahati,Assam"
+                href="https://maps.google.com/?q=Sree+Ganesh+Traders+Guwahati+Assam+781028"
                 target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

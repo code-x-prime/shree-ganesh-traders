@@ -10,7 +10,7 @@ const STATES = [
     name: "Assam",
     short: "AS",
     desc: "Ginger · Turmeric · Tea",
-    produce: ["Fresh Ginger", "Turmeric", "Assam Gold Tea"],
+    produce: ["Fresh Ginger", "Turmeric", "Assam CTC Tea"],
     left: 80.0,
     top: 37.1,
     color: "#D94F0A",

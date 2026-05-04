@@ -9,7 +9,7 @@ import { COMPANY, NAV_LINKS } from "@/lib/data/constants";
 
 const PRODUCTS = [
   "Fresh Ginger", "Turmeric", "Dry Ginger",
-  "Black Cardamom", "Dry King Chilli", "Assam Gold Tea",
+  "Black Cardamom", "Dry King Chilli", "Assam CTC Tea",
 ];
 
 const fadeUp = {

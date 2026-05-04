@@ -15,7 +15,7 @@ type Filter = "all" | "spice" | "tea";
 const FILTERS: { label: string; value: Filter; count: number }[] = [
   { label: "All Products", value: "all", count: ALL_PRODUCTS.length },
   { label: "Spices", value: "spice", count: SPICE_PRODUCTS.length },
-  { label: "Assam Gold Tea", value: "tea", count: TEA_PRODUCTS.length },
+  { label: "Assam CTC Tea", value: "tea", count: TEA_PRODUCTS.length },
 ];
 
 const DELIVERY_FEATURES = [

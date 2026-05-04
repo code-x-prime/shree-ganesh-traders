@@ -11,7 +11,7 @@ import CTABanner from "@/components/shared/CTABanner";
 export const metadata: Metadata = {
   title: "Sree Ganesh Traders — Premium Spices & Tea from North East India",
   description:
-    "B2B wholesale distributor of premium spices and Assam Gold Tea from North East India. 100% Natural, Chemical Free. Pan India Delivery.",
+    "B2B wholesale distributor of premium spices and Assam CTC Tea from North East India. 100% Natural, Chemical Free. Pan India Delivery.",
 };
 
 export default function HomePage() {

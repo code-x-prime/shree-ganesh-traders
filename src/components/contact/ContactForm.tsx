@@ -8,8 +8,8 @@ import { BsCheckCircleFill } from "react-icons/bs";
 
 const PRODUCT_OPTIONS = [
   "Fresh Ginger", "Turmeric", "Dry Ginger", "Black Cardamom",
-  "Dry King Chilli", "Assam Gold Green Tea", "Assam Gold Elachi Tea",
-  "Assam Gold Masala Tea", "Assam Gold Garden Fresh Tea", "Multiple Products",
+  "Dry King Chilli", "Assam CTC Green Tea", "Assam CTC Elachi Tea",
+  "Assam CTC Masala Tea", "Assam CTC Garden Fresh Tea", "Multiple Products",
 ];
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {

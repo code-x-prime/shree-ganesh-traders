@@ -7,7 +7,7 @@ import WhatsAppFloat from "@/components/shared/WhatsAppFloat";
 export const metadata: Metadata = {
   title: "Sree Ganesh Traders — Premium Spices & Tea from North East India",
   description:
-    "Sree Ganesh Traders is a premium B2B distributor of natural spices and Assam Gold Tea from North East India. Pan India delivery available. 100% natural, chemical free.",
+    "Sree Ganesh Traders is a premium B2B distributor of natural spices and Assam CTC Tea from North East India. Pan India delivery available. 100% natural, chemical free.",
   keywords: "spices, turmeric, ginger, assam tea, north east india, wholesale spices, B2B, guwahati",
   openGraph: {
     title: "Sree Ganesh Traders — Pure Roots. Natural Goodness.",

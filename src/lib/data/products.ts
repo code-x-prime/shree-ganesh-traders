@@ -68,7 +68,7 @@ export const TEA_VARIANTS: TeaVariant[] = [
 export const TEA_PRODUCTS: Product[] = [
   {
     id: "green-tea",
-    name: "Assam Gold Green Tea",
+    name: "Assam CTC Green Tea",
     tagline: "Pure | Natural | Refreshing",
     description: "Handpicked green tea leaves from premium Assam gardens. Light, refreshing, and loaded with antioxidants.",
     benefits: ["Rich in Antioxidants", "Boosts Metabolism", "Promotes Relaxation"],
@@ -79,7 +79,7 @@ export const TEA_PRODUCTS: Product[] = [
   },
   {
     id: "elachi-tea",
-    name: "Assam Gold Elachi Tea",
+    name: "Assam CTC Elachi Tea",
     tagline: "Aromatic | Soothing | Delightful",
     description: "Premium Assam tea blended with aromatic cardamom. A soothing brew that delights your senses.",
     benefits: ["Aids Digestion", "Aromatic & Soothing", "Natural Cardamom"],
@@ -90,7 +90,7 @@ export const TEA_PRODUCTS: Product[] = [
   },
   {
     id: "masala-tea",
-    name: "Assam Gold Masala Tea",
+    name: "Assam CTC Masala Tea",
     tagline: "Rich | Spicy | Invigorating",
     description: "Bold Assam tea with a carefully crafted blend of traditional Indian spices. Full-bodied and invigorating.",
     benefits: ["Warming & Energizing", "Traditional Spice Blend", "Rich Flavour"],
@@ -101,7 +101,7 @@ export const TEA_PRODUCTS: Product[] = [
   },
   {
     id: "garden-fresh-tea",
-    name: "Assam Gold Garden Fresh Tea",
+    name: "Assam CTC Garden Fresh Tea",
     tagline: "Strong | Fresh | Full of Life",
     description: "Classic garden-fresh Assam CTC tea. Strong, brisk, and full of life — the perfect everyday cup.",
     benefits: ["Full-Bodied Flavour", "Classic Assam Brew", "Morning Energizer"],

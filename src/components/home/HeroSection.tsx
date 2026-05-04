@@ -131,7 +131,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-display font-black text-white leading-[1.1] mb-8 tracking-tight"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 5.5rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 8vw, 5.3rem)" }}
           >
             Premium{" "}
             <span
