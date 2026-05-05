@@ -255,7 +255,16 @@ export default function Footer() {
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-xs font-semibold" style={{ color: "rgba(255,255,255,0.25)" }}>
-            © 2026 Sree Ganesh Traders. All Rights Reserved.
+            © 2026 Sree Ganesh Traders. All Rights Reserved. | Developed by{" "}
+            <a
+              href="https://groxmedia.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors duration-200"
+              style={{ color: "rgba(255,255,255,0.4)" }}
+            >
+              Grox Media
+            </a>
           </p>
           <p className="text-xs font-semibold uppercase tracking-[0.15em]" style={{ color: "rgba(255,255,255,0.15)" }}>
             Guwahati · Assam · North East India
